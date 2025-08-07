@@ -1,5 +1,5 @@
 body {
-  background-color: #222;
+  background-color: #1e3c72;
   font-size: 20px;
 }
 h1 {
@@ -25,6 +25,7 @@ h1 {
 }
 .search {
   width: 100%;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,11 +38,24 @@ h1 {
   color: #555;
   width: 80%;
   height: 60px;
-  padding: 10px 25px;
+  padding: 5px 25px;
+  padding-right: 50px;
   border-radius: 30px;
   flex: 1;
   margin-right: 16px;
   font-size: 18px;
+}
+.clear-button {
+  position: absolute;
+  top: 17%;
+  right:80px;
+  padding: 10px;
+  background-color:transparent;
+  transform: translateX(-50%);
+  cursor: pointer;
+  font-size: 22px;
+  color: #aaa;
+  /* initially hidden */
 }
 .search button {
   width: 60px;
@@ -113,4 +127,30 @@ h1 {
   margin-bottom: 5px;
   text-align: left;
   font-size: 16px;
+}
+
+.temp{
+  display: inline-block;
+  font-size: 60px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.celsius,.fahrenheit{
+  display: inline-block;
+  position: relative;
+  top: -30px;
+  cursor: pointer;
+  margin-left:
+  font-size: 60px;
+}
+.i {
+  display: inline-block;
+  position: relative;
+  top: -30px;
+  font-size: 25px;
+}
+.fahrenheit {
+  color: #b3babfff;
 }

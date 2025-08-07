@@ -1,8 +1,18 @@
 const apiKey = "0fb92c3562b1cbbe6aeddb73eaaa63a5";
 const apiUrl =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+  "https://api.openweathermap.org/data/2.5/weather?units=metric&q="; // This is the base URL for the OpenWeatherMap API. It includes the API key and specifies that the temperature should be in metric units (Celsius
+
+let isCelsius = true; // Initialize temperature values. These will be updated when the weather data is fetched
+let celsiusValue = null;
+let fahrenheitValue = null;
+
+const clearBtn = document.getElementById("clearBtn");
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
+const tempElement = document.querySelector(".temp");
+const celsiusElement = document.querySelector(".celsius");
+const fahrenheitElement = document.querySelector(".fahrenheit");
+
 async function checkWeather(city) {
   const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
   var data = await response.json();
@@ -17,8 +27,15 @@ async function checkWeather(city) {
   }
   console.log(data);
 
+  celsiusValue = Math.round(data.main.temp);
+  fahrenheitValue = Math.round((celsiusValue * 9) / 5 + 32);
+  tempElement.innerText = celsiusValue; // Initialize with Celsius value
+  isCelsius = true; // Track the current temperature unit
+  // celsiusElement.style.color = "white"; // Set Celsius to active color
+  // fahrenheitElement.style.color = "#b3babfff"; // Set Fahrenheit to inactive color
+  
   document.querySelector(".city-name").innerText = "Weather in " + data.name;
-  document.querySelector(".temp").innerText = Math.round(data.main.temp) + "°C";
+  // document.querySelector(".temp").innerText = Math.round(data.main.temp) + "";
   document.querySelector(".humidity").innerText =
     "Humidity: " + data.main.humidity + "%";
   document.querySelector(".humidity-1").innerText =
@@ -61,6 +78,41 @@ searchBox.addEventListener("keyup", (event) => {
     const city = searchBox.value;
     checkWeather(city);
   }
+});
+
+searchBox.addEventListener("input", () => {
+  if (searchBox.value !== "") {
+    clearBtn.style.display = "block";
+  } else {
+    clearBtn.style.display = "none";
+  }
+});
+
+clearBtn.addEventListener("click", () => {
+  searchBox.value = ""; // Clear the input field
+
+  clearBtn.style.display = "none"; // Hide the clear button after clearing
+});
+
+fahrenheitElement.addEventListener("click", () => {
+  if (!isCelsius || celsiusValue === null) return; // If already in Fahrenheit, do nothing
+  isCelsius = false; // Switch to Fahrenheit
+  fahrenheitElement.style.color = "white";
+  celsiusElement.style.color = "#b3babfff";
+  tempElement.innerText = fahrenheitValue;
+  // alert("Temperature is now in Fahrenheit");
+  console.log("Temperature is now in Fahrenheit");
+  console.log("Fahrenheit value:", fahrenheitValue);
+});
+celsiusElement.addEventListener("click", () => {
+  if (isCelsius || celsiusValue === null) return; // If already in Celsius, do nothing
+  isCelsius = true; // Switch to Celsius
+  celsiusElement.style.color = "white";
+  fahrenheitElement.style.color = "#b3babfff";
+  tempElement.innerText = celsiusValue;
+  // alert("Temperature is now in Celsius");
+  console.log("Temperature is now in Celsius");
+  console.log("Celsius value:", celsiusValue);
 });
 
 console.log("Hello, World!");
