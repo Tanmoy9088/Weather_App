@@ -2,6 +2,223 @@ body {
   background-color: #1e3c72;
   font-size: 20px;
 }
+/* Default light text for dark backgrounds */
+#weather-bg,
+.card,
+.city-name,
+.weather-description,
+.temp {
+  color: #ffffff;
+}
+
+/* Dark text for bright backgrounds */
+.clear-day,
+.clouds,
+.snow {
+  color: #222222;
+}
+
+.clear-day .city-name,
+.clear-day .weather-description,
+.clear-day .temp,
+.clouds .city-name,
+.clouds .weather-description,
+.clouds .temp,
+.snow .city-name,
+.snow .weather-description,
+.snow .temp {
+  color: #222222;
+}
+.search button {
+  background: var(--accent);
+}
+.clear-day {
+  --accent: #f5b700;
+}
+.clouds {
+  --accent: #90a4ae;
+}
+.rain {
+  --accent: #00acc1;
+}
+.thunderstorm {
+  --accent: #fdd835;
+}
+.snow {
+  --accent: #81d4fa;
+}
+
+ .date {
+    position: fixed;
+    top: 10px;
+    left: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+/* Weather background container */
+#weather-bg {
+  /* position: fixed;
+  inset: 0;*/
+  position: relative;
+  z-index: 3;
+  /* background: rgba(255, 255, 255, 0.1); */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  overflow: hidden;
+  transition: background 0.6s ease-in-out;
+  color: #555555ff;
+}
+
+/* ====== Clear Day: moving gradient sky ====== */
+.clear-day {
+  background: linear-gradient(270deg, #87ceeb, #f0e68c);
+  background-size: 400% 400%;
+  animation: clear-sky-move 20s ease infinite;
+}
+@keyframes clear-sky-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ====== Cloudy: slow moving grey clouds ====== */
+.clouds {
+  background: linear-gradient(270deg, #cfd8dc, #90a4ae);
+  background-size: 400% 400%;
+  animation: cloudy-move 30s ease infinite;
+}
+@keyframes cloudy-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ====== Rain: darker animated streaks ====== */
+.rain {
+  background: linear-gradient(#546e7a, #263238);
+  overflow: hidden;
+}
+
+/* Front rain layer (fast) */
+.rain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(transparent, rgba(255, 255, 255, 0.3));
+  background-size: 2px 20px;
+  animation: rain-fall-fast 0.4s linear infinite;
+}
+
+/* Back rain layer (slow) */
+.rain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(transparent, rgba(255, 255, 255, 0.15));
+  background-size: 1px 15px;
+  animation: rain-fall-slow 0.7s linear infinite;
+}
+
+@keyframes rain-fall-fast {
+  to {
+    background-position: 0 20px;
+  }
+}
+@keyframes rain-fall-slow {
+  to {
+    background-position: 0 15px;
+  }
+}
+
+/* ====== Snow: drifting flakes ====== */
+.snow {
+  background: linear-gradient(#90caf9, #e3f2fd);
+  overflow: hidden;
+}
+
+/* Large slow snowflakes */
+.snow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(white 2px, transparent 2px);
+  background-size: 25px 25px;
+  animation: snow-fall-slow 8s linear infinite;
+}
+
+/* Small fast snowflakes */
+.snow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 15px 15px;
+  animation: snow-fall-fast 4s linear infinite;
+}
+
+@keyframes snow-fall-slow {
+  to {
+    background-position: 0 25px;
+  }
+}
+@keyframes snow-fall-fast {
+  to {
+    background-position: 0 15px;
+  }
+}
+
+/* ====== Thunderstorm: moving dark sky + lightning ====== */
+.thunderstorm {
+  background: linear-gradient(270deg, #37474f, #000);
+  background-size: 400% 400%;
+  animation: storm-move 20s ease infinite;
+}
+@keyframes storm-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.thunderstorm::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  animation: lightning 4s infinite;
+}
+@keyframes lightning {
+  0%,
+  97%,
+  100% {
+    background-color: transparent;
+  }
+  98% {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  99% {
+    background-color: transparent;
+  }
+}
+
 h1 {
   color: #ffffff;
   text-align: center;
@@ -13,11 +230,20 @@ h1 {
   font-family: "poppins", sans-serif;
   box-sizing: border-box;
 }
+
+.city-weather-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
 .card {
   width: 90%;
-  max-width: 720px;
-  /* background: linear-gradient(to right, #1e3c72, #2a5298); */
-  color: #ffffff;
+  max-width: 1080px;
+  height: 100%;
+  /* background-image: url("images/images/"); */
+  color: #d1ccccff;
   border-radius: 20px;
   padding: 40px 35px;
   text-align: center;
@@ -48,14 +274,14 @@ h1 {
 .clear-button {
   position: absolute;
   top: 10%;
-  right:80px;
+  right: 80px;
   padding: 10px;
-  background-color:transparent;
+  background-color: transparent;
   transform: translateX(-50%);
   cursor: pointer;
   font-size: 22px;
   color: #aaa;
-  /* initially hidden */
+  display: none; /* initially hidden */
 }
 .search button {
   width: 60px;
@@ -85,25 +311,46 @@ h1 {
   font-weight: 400;
   margin-top: 10px;
 }
+.location-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+.city-name {
+  display: inline-block;
+  font-size: 2rem;
+  color: #fbfcfeff;
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: center;
+}
 .details {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
   padding: 0 20px;
   margin-top: 50px;
 }
 .col {
   display: flex;
   align-items: center;
+  padding: 10px;
   text-align: left;
+  height: 130px;
+  width: 180px;
 }
 .col img {
   width: 40px;
   margin-right: 10px;
 }
+
 .humidity-1,
 .wind {
-  font-size: 28px;
+  font-size: 18px;
   margin-top: -6px;
 }
 .details-weather {
@@ -114,7 +361,7 @@ h1 {
 }
 .weather-description {
   font-size: 24px;
-  color: #ffffff;
+  color: #f5ceceff;
   margin-top: 20px;
   text-align: center;
 }
@@ -129,43 +376,77 @@ h1 {
   font-size: 16px;
 }
 
-.temp{
+.temp {
   display: inline-block;
   font-size: 60px;
   font-weight: 600;
   margin-top: 20px;
   margin-right: 10px;
+  margin-left: 80px;
 }
 
-.celsius,.fahrenheit{
+.celsius,
+.fahrenheit {
   display: inline-block;
   position: relative;
   top: -30px;
   cursor: pointer;
-  margin-left:
-  font-size: 60px;
+  /* margin-left: */
+  font-size: 20px;
 }
 .i {
   display: inline-block;
   position: relative;
   top: -30px;
-  font-size: 25px;
+  font-size: 20px;
 }
 .fahrenheit {
   color: #b3babfff;
 }
-@media (max-width: 600px) {
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6 {
+  /* height: 80px; */
+  z-index: 5;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.12);
+  text-align: center;
+  border: 1px solid #d1ccccff;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+@media (max-width: 480px) {
   .card {
-    padding: 20px;
+    padding: 0px;
   }
   .search input {
     width: 100%;
-    margin-right: 0;
-    margin-left: 5px;;
+    margin-right: 40px;
+    margin-left: 20px;
+  }
+  .clear-button {
+    right: 85px;
+    display: block; /* show on small screens */
   }
   .search button {
     width: 50px;
     height: 50px;
+  }
+  .weather-icon {
+    width: 120px;
+    height: 120px;
+
+  }
+  .details-weather {
+    display: flex;
+    flex-direction: column;
+  }
+.weather p{
+    font-size: 16px;
   }
   .weather h1 {
     font-size: 60px;
@@ -174,12 +455,47 @@ h1 {
     font-size: 24px;
   }
   .details {
-    flex-direction: column;
+    display: flex;
+    /* flex-direction: column; */
+    flex: 1;
+    flex-wrap: wrap;
     align-items: center;
     margin-top: 30px;
-    margin
-  } 
-  .col{
-    margin-bottom: 30px;
+    justify-content: center;
+    gap: 5px; /* space between items */
+    /* margin */
+  }
+  .col {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    height: 150px;
+    width: 130px;
+    padding: 10px;
+    font-size: 12px;
+  }
+  .col img {
+    width: 30px;
+  }
+  .temp {
+    font-size: 50px;
+    margin-left: 40px;
+  }
+  .celsius,
+  .fahrenheit {
+    top: -20px;
+    font-size: 18px;
+  }
+  .date {
+    position: fixed;
+    top: 10px;
+    left: 15px;
+    font-size: 16px;
+  }
+  .i {
+    top: -20px;
+    font-size: 18px;
   }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
   </head>
   <body>
     <div class="card">
@@ -13,35 +14,72 @@
         <span class="clear-button" id="clearBtn">x</span>
         <button><img src="images/images/search.png" /></button>
       </div>
-      <div class="weather">
+      <div class="weather clear-day" id="weather-bg">
         <div class="details-weather">
-          <img src="images/images/rain.png" class="weather-icon" />
+          <p class="date"></p>
+          <div><img src="images/images/rain.png" class="weather-icon" /></div>
           <div class="percipitation-container">
             <p class="percipitation feels-like">
               Feels like: 31<span>°C</span>
             </p>
-            <p class="percipitation humidity">Humidity: 74%</p>
-            <p class="percipitation pressure">Pressure: 1001 Mb</p>
+            <p class="percipitation humidity">Humidity: 76%</p>
+            <p class="percipitation pressure">Pressure: 1007 Mb</p>
+            <p class="percipitation cloud">Cloud cover: 90%</p>
           </div>
         </div>
-        <h1 class="temp">24</h1>
-        <span class="celsius">°C</span> <span class="i">|</span>
-        <span class="fahrenheit" >°F</span>
-        <h2 class="city-name">Delhi</h2>
-        <div class="weather-description">drizzile</div>
+        <div class="city-weather-container">
+          <div>
+            <img
+              src="/assets/location.svg"
+              alt="location icon"
+              class="location-icon"
+            />
+            <h2 class="city-name" style="font-size: 2rem">Medinipur</h2>
+          </div>
+          <div>
+            <h1 class="temp">24</h1>
+            <span class="celsius">°C</span> <span class="i">|</span>
+            <span class="fahrenheit">°F</span>
+          </div>
+          <div class="weather-description">Drizzile</div>
+        </div>
+
         <div class="details">
-          <div class="col">
+          <div class="col col-1">
             <img src="images/images/humidity.png" />
             <div class="humidity-1">
-              <p>60%</p>
-              <p>Humidity</p>
+              <p>Humidity: 79%</p>
             </div>
           </div>
-          <div class="col">
+          <div class="col col-2">
             <img src="images/images/wind.png" />
             <div class="wind">
-              <p>10 km/h</p>
-              <p>Wind Speed</p>
+              <p>Wind speed: 02 km/h</p>
+            </div>
+          </div>
+          <div class="col col-3">
+            <img src="images/images/wind.png" />
+            <div class="wind">
+              <p>Visibility: 10 km</p>
+            </div>
+          </div>
+          <div class="col col-4">
+            <img src="images/images/wind.png" />
+            <div class="wind">
+              <p>Uv Index: Moderate</p>
+            </div>
+          </div>
+          <div class="col col-5">
+            <div><img src="assets/sunrise.svg" /></div>
+            <div class="wind">
+              <p>Sunrise: 6:15 am</p>
+              <p>Sunset: 7:05 pm</p>
+            </div>
+          </div>
+          <div class="col col-6">
+            <img src="images/images/wind.png" />
+            <div class="wind">
+              <p>Wind speed: 02 km/h</p>
             </div>
           </div>
         </div>
