@@ -9,16 +9,20 @@ const apiKey = "0fb92c3562b1cbbe6aeddb73eaaa63a5";
 const apiUrl =
   "https://api.openweathermap.org/data/2.5/weather?units=metric&q="; // This is the base URL for the OpenWeatherMap API. It includes the API key and specifies that the temperature should be in metric units (Celsius)
 
-const getDay = new Date().getDate(); // Get the current day of the month
-const getMonth = new Date().getMonth() + 1; // Get the current month
-const getYear = new Date().getFullYear(); // Get the current year
-const getHours = new Date().getHours(); // Get the current hour
-const getMinutes = new Date().getMinutes(); // Get the current minutes
-const getSeconds = new Date().getSeconds(); // Get the current seconds
-
 // Format the date and time for display
-const formattedDate = `${getDay}/${getMonth}/${getYear} ${getHours}:${getMinutes}:${getSeconds}`; // Format the date and time as a string
-document.querySelector(".date").innerText = formattedDate; // Display the formatted date and time
+
+function refreshTime() {
+  const getDay = new Date().getDate(); // Get the current day of the month
+  const getMonth = new Date().getMonth() + 1; // Get the current month
+  const getYear = new Date().getFullYear(); // Get the current year
+  const getHours = new Date().getHours(); // Get the current hour
+  const getMinutes = new Date().getMinutes(); // Get the current minutes
+  const getSeconds = new Date().getSeconds(); // Get the current seconds
+  // const getMilliseconds = new Date().getMilliseconds(); // Get the current milliseconds
+  const formattedDate = `${getDay}/${getMonth}/${getYear} ${getHours}:${getMinutes}:${getSeconds}`; // Format the date and time as a string
+  document.querySelector(".date").innerText = formattedDate; // Display the formatted date and time
+}
+setInterval(refreshTime, 100);
 
 // Initialize variables to store weather data
 
@@ -184,7 +188,10 @@ console.log(getDirectonWind(degree));
 function setWeatherBackground(condition) {
   const bg = document.getElementById("weather-bg");
 
-  bg.className = ""; // remove old class
+  // Remove only old weather classes
+  bg.classList.remove("clear-day", "clouds", "rain", "snow", "thunderstorm");
+
+  // Add the new one based on condition
   switch (condition.toLowerCase()) {
     case "clear":
       bg.classList.add("clear-day");
@@ -195,6 +202,7 @@ function setWeatherBackground(condition) {
     case "rain":
     case "drizzle":
       bg.classList.add("rain");
+      document.querySelector(".rain-container").display = "show";
       break;
     case "snow":
       bg.classList.add("snow");
@@ -203,8 +211,75 @@ function setWeatherBackground(condition) {
       bg.classList.add("thunderstorm");
       break;
     default:
-      bg.classList.add("rain");
+      bg.classList.add("clear-day");
   }
 }
 
+const toggleButton = document.getElementById("theme-toggle");
+const root = document.documentElement;
+
+toggleButton.addEventListener("click", () => {
+  const currentTheme = root.getAttribute("data-theme");
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+  root.setAttribute("data-theme", newTheme);
+
+  // Change icon for fun
+  toggleButton.textContent = newTheme === "light" ? "🌞" : "🌙";
+});
+
+const rainContainer = document.querySelector(".rain-container");
+
+const createDrop = function () {
+  const drop = document.createElement("div");
+  drop.classList.add("raindrop");
+
+  // Random horizontal position
+  drop.style.left = Math.random() * window.innerWidth + "px";
+
+  // Random length & speed
+  const length = Math.random() * 20 + 10; // 10-30px
+  drop.style.height = length + "px";
+  const duration = Math.random() * 1 + 0.5; // 0.5 - 1.5s
+  drop.style.animationDuration = duration + "s";
+
+  // When animation ends → remove drop + make splash
+  drop.addEventListener("animationend", () => {
+    drop.remove();
+    createSplash(parseFloat(drop.style.left));
+  });
+
+  rainContainer.appendChild(drop);
+};
+
+// Create splash at drop position
+const createSplash =  function (x) {
+  const splash = document.createElement("div");
+  splash.classList.add("splash");
+  splash.style.left = x - 4 + "px"; // center splash
+  splash.style.bottom = "0px";
+  rainContainer.appendChild(splash);
+
+  splash.addEventListener("animationend", () => splash.remove());
+}
+
+// Continuous rain
+// setInterval(() => {
+//   for (let i = 0; i < 3; i++) {
+//     // 3 drops per tick
+//     createDrop();
+//   }
+// }, 50);
+
+
+//Convert Unix time to readable time 
+const convertTimestamp = (timeStamp) => {
+
+  return new Date(parseInt(timeStamp * 1000))
+}
+console.log(convertTimestamp(1755996500))
+
+// const timeTable = {
+//   timeZone: timezone;
+
+// }
 console.log("Hello, World!");

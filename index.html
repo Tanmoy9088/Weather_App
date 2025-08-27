@@ -6,9 +6,18 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Chonburi&family=Dancing+Script:wght@400..700&family=Orbitron:wght@400..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Sacramento&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+    </style>
   </head>
   <body>
+    <div class="rain-container"></div>
+
     <div class="card">
+      <div class="heading">My Weather App
+      </div>
+      <button id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+
       <div class="search">
         <input type="text" placeholder="enter city name" spellcheck="false" />
         <span class="clear-button" id="clearBtn">x</span>
@@ -16,12 +25,16 @@
       </div>
       <div class="weather clear-day" id="weather-bg">
         <div class="details-weather">
-          <p class="date"></p>
+          <p
+            class="date orbitron-clock"
+          ></p>
           <div><img src="images/images/rain.png" class="weather-icon" /></div>
           <div class="percipitation-container">
             <p class="percipitation feels-like">
               Feels like: 31<span>°C</span>
             </p>
+            <p class="percipitation humidity">Max temperature: 35</p>
+            <p class="percipitation humidity">Humidity: 76%</p>
             <p class="percipitation humidity">Humidity: 76%</p>
             <p class="percipitation pressure">Pressure: 1007 Mb</p>
             <p class="percipitation cloud">Cloud cover: 90%</p>
@@ -69,11 +82,17 @@
               <p>Uv Index: Moderate</p>
             </div>
           </div>
-          <div class="col col-5">
-            <div><img src="assets/sunrise.svg" /></div>
-            <div class="wind">
-              <p>Sunrise: 6:15 am</p>
-              <p>Sunset: 7:05 pm</p>
+          <div class="col col-5 sunrise-sunset">
+            <div class="sunrise-container">
+              <div><p class="sunset wind">Sunset</p></div>
+              <div class="sunrise"><img src="assets/sunrise.svg" /></div>
+              <div class="sunrise wind"><p>6:15 am</p></div>
+            </div>
+
+            <div class="sunset-container">
+              <div><p class="sunset wind">Sunset</p></div>
+              <div><img src="assets/sunset.svg" /></div>
+              <div><p class="sunset wind">7:05 pm</p></div>
             </div>
           </div>
           <div class="col col-6">
