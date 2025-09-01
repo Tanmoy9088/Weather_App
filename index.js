@@ -25,7 +25,8 @@ function refreshTime() {
 setInterval(refreshTime, 100);
 
 // Initialize variables to store weather data
-
+// let sunriseTime = null;
+// let sunsetTime = null;
 let isCelsius = true; // Initialize temperature values. These will be updated when the weather data is fetched
 let celsiusValue = null;
 let fahrenheitValue = null; // Fahrenheit value will be calculated based on the Celsius value
@@ -52,7 +53,39 @@ async function checkWeather(city) {
     return;
   }
   console.log(data);
+  let sunriseTime = data.sys.sunrise;
+  let sunsetTime = data.sys.sunset;
+  let visibility = data.visibility / 1000;
+  let maxTemp = Math.round(data.main.temp_max);
+  let minTemp = Math.round(data.main.temp_min);
+  //Convert Unix time to readable time
+  const convertTimestamp = (timeStamp_1, timeStamp_2) => {
+    var sunrise = new Date(parseInt(timeStamp_1 * 1000));
+    var sunset = new Date(parseInt(timeStamp_2 * 1000));
 
+    const sunRiseTime = sunrise.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const sunSetTime = sunset.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return { sunrise: sunRiseTime, sunset: sunSetTime };
+  };
+  const times = convertTimestamp(sunriseTime, sunsetTime);
+  console.log(times.sunrise, times.sunset);
+
+  document.querySelector(".ground-level").innerText =
+    "Ground-Level: " + data.main.grnd_level + "m";
+  document.querySelector(".sea-level").innerText =
+    "Sea-Level: " + data.main.sea_level + "m";
+  document.querySelector(".max-temp").innerText = "Max-Temp: " + maxTemp + " °C";
+  document.querySelector(".min-temp").innerText = "Min-Temp: " + minTemp + " °C";
+  document.querySelector(".visibility").innerText =
+    "Visibility: " + visibility + " KM";
+  document.querySelector(".timeRise").innerText = times.sunrise;
+  document.querySelector(".timeSet").innerText = times.sunset;
   weatherCondition = data.weather[0].main; // Get the main weather condition (e.g., Clear, Clouds, Rain)
   console.log("Weather condition:", weatherCondition);
 
@@ -252,7 +285,7 @@ const createDrop = function () {
 };
 
 // Create splash at drop position
-const createSplash =  function (x) {
+const createSplash = function (x) {
   const splash = document.createElement("div");
   splash.classList.add("splash");
   splash.style.left = x - 4 + "px"; // center splash
@@ -260,7 +293,7 @@ const createSplash =  function (x) {
   rainContainer.appendChild(splash);
 
   splash.addEventListener("animationend", () => splash.remove());
-}
+};
 
 // Continuous rain
 // setInterval(() => {
@@ -269,14 +302,6 @@ const createSplash =  function (x) {
 //     createDrop();
 //   }
 // }, 50);
-
-
-//Convert Unix time to readable time 
-const convertTimestamp = (timeStamp) => {
-
-  return new Date(parseInt(timeStamp * 1000))
-}
-console.log(convertTimestamp(1755996500))
 
 // const timeTable = {
 //   timeZone: timezone;
