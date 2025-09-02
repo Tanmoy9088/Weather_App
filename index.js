@@ -127,22 +127,22 @@ async function checkWeather(city) {
     "Clouds cover: " + data.clouds.all + "%";
 
   if (data.weather[0].main == "Clouds") {
-    document.querySelector(".weather-icon").src = "images/images/clouds.png";
+    document.querySelector(".weather-icon").src = "images/images/Cloudy.gif";
     // document.querySelector(".card").style.backgroundColor = "#8a895bff";
   } else if (data.weather[0].main == "Clear") {
-    document.querySelector(".weather-icon").src = "images/images/clear.png";
+    document.querySelector(".weather-icon").src = "images/images/Weather-sunny.gif";
     // document.querySelector(".card").style.backgroundColor = "#d2b929ff";
   } else if (data.weather[0].main == "Drizzle") {
     document.querySelector(".weather-icon").src = "images/images/drizzle.png";
     // document.querySelector(".card").style.backgroundColor = "#306066ff";
   } else if (data.weather[0].main == "Mist") {
-    document.querySelector(".weather-icon").src = "images/images/mist.png";
+    document.querySelector(".weather-icon").src = "images/images/Weather-mist.gif";
     // document.querySelector(".card").style.backgroundColor = "#37193cff";
   } else if (data.weather[0].main == "Rain") {
-    document.querySelector(".weather-icon").src = "images/images/rain.png";
+    document.querySelector(".weather-icon").src = "images/images/Rainy.gif";
     // document.querySelector(".card").style.backgroundColor = "#34abbdff";
   } else {
-    document.querySelector(".weather-icon").src = "images/images/snow.png";
+    document.querySelector(".weather-icon").src = "images/images/Weahter-snow.";
     // document.querySelector(".card").style.backgroundColor = "#d5e9ecff";
   }
 }
@@ -260,40 +260,40 @@ toggleButton.addEventListener("click", () => {
   toggleButton.textContent = newTheme === "light" ? "🌞" : "🌙";
 });
 
-const rainContainer = document.querySelector(".rain-container");
+// const rainContainer = document.querySelector(".rain-container");
 
-const createDrop = function () {
-  const drop = document.createElement("div");
-  drop.classList.add("raindrop");
+// const createDrop = function () {
+//   const drop = document.createElement("div");
+//   drop.classList.add("raindrop");
 
-  // Random horizontal position
-  drop.style.left = Math.random() * window.innerWidth + "px";
+//   // Random horizontal position
+//   drop.style.left = Math.random() * window.innerWidth + "px";
 
-  // Random length & speed
-  const length = Math.random() * 20 + 10; // 10-30px
-  drop.style.height = length + "px";
-  const duration = Math.random() * 1 + 0.5; // 0.5 - 1.5s
-  drop.style.animationDuration = duration + "s";
+//   // Random length & speed
+//   const length = Math.random() * 20 + 10; // 10-30px
+//   drop.style.height = length + "px";
+//   const duration = Math.random() * 1 + 0.5; // 0.5 - 1.5s
+//   drop.style.animationDuration = duration + "s";
 
-  // When animation ends → remove drop + make splash
-  drop.addEventListener("animationend", () => {
-    drop.remove();
-    createSplash(parseFloat(drop.style.left));
-  });
+//   // When animation ends → remove drop + make splash
+//   drop.addEventListener("animationend", () => {
+//     drop.remove();
+//     createSplash(parseFloat(drop.style.left));
+//   });
 
-  rainContainer.appendChild(drop);
-};
+//   rainContainer.appendChild(drop);
+// };
 
-// Create splash at drop position
-const createSplash = function (x) {
-  const splash = document.createElement("div");
-  splash.classList.add("splash");
-  splash.style.left = x - 4 + "px"; // center splash
-  splash.style.bottom = "0px";
-  rainContainer.appendChild(splash);
+// // Create splash at drop position
+// const createSplash = function (x) {
+//   const splash = document.createElement("div");
+//   splash.classList.add("splash");
+//   splash.style.left = x - 4 + "px"; // center splash
+//   splash.style.bottom = "0px";
+//   rainContainer.appendChild(splash);
 
-  splash.addEventListener("animationend", () => splash.remove());
-};
+//   splash.addEventListener("animationend", () => splash.remove());
+// };
 
 // Continuous rain
 // setInterval(() => {
