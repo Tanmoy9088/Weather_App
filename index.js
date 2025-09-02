@@ -18,11 +18,55 @@ function refreshTime() {
   const getHours = new Date().getHours(); // Get the current hour
   const getMinutes = new Date().getMinutes(); // Get the current minutes
   const getSeconds = new Date().getSeconds(); // Get the current seconds
+  let dayName = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  switch (getDay) {
+    case 0:
+      dayName = dayName[0];
+
+      break;
+    case 1:
+      dayName = dayName[1];
+
+      break;
+    case 2:
+      dayName = dayName[2];
+
+      break;
+    case 3:
+      dayName = dayName[3];
+
+      break;
+    case 4:
+      dayName = dayName[4];
+
+      break;
+    case 5:
+      dayName = dayName[5];
+
+      break;
+    case 6:
+      dayName = dayName[6];
+
+      break;
+
+    default:
+      dayName = dayName[0];
+      break;
+  }
+  console.log(dayName);
   // const getMilliseconds = new Date().getMilliseconds(); // Get the current milliseconds
-  const formattedDate = `${getDay}/${getMonth}/${getYear} ${getHours}:${getMinutes}:${getSeconds}`; // Format the date and time as a string
+  const formattedDate = `${dayName}\n${getDay}/${getMonth}/${getYear} ${getHours}:${getMinutes}:${getSeconds}`; // Format the date and time as a string
   document.querySelector(".date").innerText = formattedDate; // Display the formatted date and time
 }
-setInterval(refreshTime, 100);
+setInterval(refreshTime, 5000);
 
 // Initialize variables to store weather data
 // let sunriseTime = null;
@@ -80,8 +124,10 @@ async function checkWeather(city) {
     "Ground-Level: " + data.main.grnd_level + "m";
   document.querySelector(".sea-level").innerText =
     "Sea-Level: " + data.main.sea_level + "m";
-  document.querySelector(".max-temp").innerText = "Max-Temp: " + maxTemp + " °C";
-  document.querySelector(".min-temp").innerText = "Min-Temp: " + minTemp + " °C";
+  document.querySelector(".max-temp").innerText =
+    "Max-Temp: " + maxTemp + " °C";
+  document.querySelector(".min-temp").innerText =
+    "Min-Temp: " + minTemp + " °C";
   document.querySelector(".visibility").innerText =
     "Visibility: " + visibility + " KM";
   document.querySelector(".timeRise").innerText = times.sunrise;
@@ -130,13 +176,15 @@ async function checkWeather(city) {
     document.querySelector(".weather-icon").src = "images/images/Cloudy.gif";
     // document.querySelector(".card").style.backgroundColor = "#8a895bff";
   } else if (data.weather[0].main == "Clear") {
-    document.querySelector(".weather-icon").src = "images/images/Weather-sunny.gif";
+    document.querySelector(".weather-icon").src =
+      "images/images/Weather-sunny.gif";
     // document.querySelector(".card").style.backgroundColor = "#d2b929ff";
   } else if (data.weather[0].main == "Drizzle") {
     document.querySelector(".weather-icon").src = "images/images/drizzle.png";
     // document.querySelector(".card").style.backgroundColor = "#306066ff";
   } else if (data.weather[0].main == "Mist") {
-    document.querySelector(".weather-icon").src = "images/images/Weather-mist.gif";
+    document.querySelector(".weather-icon").src =
+      "images/images/Weather-mist.gif";
     // document.querySelector(".card").style.backgroundColor = "#37193cff";
   } else if (data.weather[0].main == "Rain") {
     document.querySelector(".weather-icon").src = "images/images/Rainy.gif";

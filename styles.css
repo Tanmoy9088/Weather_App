@@ -63,9 +63,11 @@ body {
   position: fixed;
   top: 10px;
   left: 15px;
-  font-size: 0.9rem;
+  width:200px;
+  height: 100px;
+  font-size: 1.5rem;
   background: rgba(148, 178, 178, 0.79);
-  padding: 0.25rem 0.75rem;
+  padding: 2px;
   border-radius: 12px;
   backdrop-filter: blur(6px);
 }
@@ -224,7 +226,7 @@ body {
 :root {
   --bg-color: #020b2eff;
   --text-color: #ffffff;
-  --card-bg: rgba(34,107,163);
+  --card-bg: rgba(34, 107, 163);
   --accent-clear: #f5b700;
   --accent-clouds: #90a4ae;
   --accent-rain: #2c565cff;
@@ -236,7 +238,7 @@ body {
 [data-theme="light"] {
   --bg-color: #627e75;
   --text-color: #222222;
-  --card-bg: rgba(233,196,41,0.2);
+  --card-bg: rgba(233, 196, 41, 0.2);
   --dark-bg: #f1f2f5ff;
 }
 
@@ -264,7 +266,7 @@ body {
 /* ===== Theme Toggle Button ===== */
 #theme-toggle {
   position: fixed;
-  z-index:20;
+  z-index: 20;
   top: 15px;
   right: 15px;
   background: var(--card-bg);
@@ -296,10 +298,10 @@ h1 {
 }
 .heading {
   position: relative;
-  z-index:10;
+  z-index: 10;
   top: 15px;
   left: 15px;
-  width:auto;
+  width: auto;
   color: var(--text-color);
   font-size: 1.5rem;
   /* border: 2px solid white; */
@@ -309,17 +311,17 @@ h1 {
   padding: 5px;
   /* background-color: var(--card-bg); */
 }
-.heading-bg{
-  display:flex;
-  gap:40px;
-  position:fixed;
-  top:0;
-  z-index:10;
-  height:80px;
-  width:100%;
-  margin-left:0;
+.heading-bg {
+  display: flex;
+  gap: 40px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  height: 80px;
+  width: 100%;
+  margin-left: 0;
   margin-bottom: 20px;
-  background-color: #f5b700;
+  background-color: #db1f48;
 }
 
 .city-weather-container {
@@ -330,8 +332,8 @@ h1 {
   margin-top: 20px;
 }
 .card {
-  width: 90%;
-  max-width: 1080px;
+  width: 100%;
+  /* max-width: 1080px; */
   height: 100%;
   /* background-image: url("images/images/"); */
   color: #988be0ff;
@@ -346,12 +348,12 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin:auto;
+  margin: auto;
 }
 .search input {
   border: 0;
   outline: 0;
-  background-color:rgba(254,254,254,0.3);
+  background-color: rgba(254, 254, 254, 0.3);
   color: #253949;
   width: 80%;
   height: 60px;
@@ -408,10 +410,11 @@ h1 {
   height: 25px;
   margin-right: 10px;
 }
+
 .city-name {
   display: inline-block;
   font-size: 2rem;
-  color:--var(--text-color) ;
+  color: --var(--text-color);
   margin-top: 10px;
   font-weight: 600;
   text-align: center;
@@ -479,6 +482,12 @@ h1 {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+  border-size: border-box;
+  border-radius: 15px;
+  background-color: #98d7c2;
 }
 .percipitation {
   margin-bottom: 5px;
@@ -620,6 +629,7 @@ h1 {
     position: fixed;
     top: 10px;
     left: 15px;
+    width: 50px;
     font-size: 16px;
   }
   .i {
