@@ -9,15 +9,23 @@ const apiKey = "0fb92c3562b1cbbe6aeddb73eaaa63a5";
 const apiUrl =
   "https://api.openweathermap.org/data/2.5/weather?units=metric&q="; // This is the base URL for the OpenWeatherMap API. It includes the API key and specifies that the temperature should be in metric units (Celsius)
 
+
+const apiUrl2 = "https://api.open-meteo.com/v1/forecast?latitude=19.0760&longitude=72.8777&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Kolkata";
 // Format the date and time for display
 
 function refreshTime() {
   const getDay = new Date().getDate(); // Get the current day of the month
-  const getMonth = new Date().getMonth() + 1; // Get the current month
+  const getMonth = new Date().getMonth(); // Get the current month
   const getYear = new Date().getFullYear(); // Get the current year
   const getHours = new Date().getHours(); // Get the current hour
   const getMinutes = new Date().getMinutes(); // Get the current minutes
-  const getSeconds = new Date().getSeconds(); // Get the current seconds
+
+  time = time.toLocaleString("en-US", {
+    // timeZone: `${result.local || "Asia/Kolkata"}`, // Use the fetched timezone or default to "Asia/Kolkata"
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
   let dayName = [
     "Sunday",
     "Monday",
@@ -61,16 +69,82 @@ function refreshTime() {
       dayName = dayName[0];
       break;
   }
-  console.log(dayName);
+  // console.log(dayName);
+
+  let monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  switch (getMonth) {
+    case 0:
+      monthNames = monthNames[0];
+
+      break;
+    case 1:
+      monthNames = monthNames[1];
+
+      break;
+    case 2:
+      monthNames = monthNames[2];
+
+      break;
+    case 3:
+      monthNames = monthNames[3];
+
+      break;
+    case 4:
+      monthNames = monthNames[4];
+
+      break;
+    case 5:
+      monthNames = monthNames[5];
+
+      break;
+    case 6:
+      monthNames = monthNames[6];
+
+      break;
+    case 7:
+      monthNames = monthNames[7];
+
+      break;
+    case 8:
+      monthNames = monthNames[8];
+
+      break;
+    case 9:
+      monthNames = monthNames[9];
+
+      break;
+    case 10:
+      monthNames = monthNames[10];
+
+      break;
+    default:
+      monthNames = monthNames[11];
+  }
   // const getMilliseconds = new Date().getMilliseconds(); // Get the current milliseconds
-  const formattedDate = `${dayName}\n${getDay}/${getMonth}/${getYear} ${getHours}:${getMinutes}:${getSeconds}`; // Format the date and time as a string
+  const formattedDate = `${dayName}, ${getDay} ${monthNames} ${getYear} | Local Time ${time}`; // Format the date and time as a string
   document.querySelector(".date").innerText = formattedDate; // Display the formatted date and time
 }
-setInterval(refreshTime, 5000);
+setInterval(refreshTime, 1000);
 
 // Initialize variables to store weather data
 // let sunriseTime = null;
 // let sunsetTime = null;
+var time = new Date();
+let timeZone = null; // Timezone will be fetched from the API
 let isCelsius = true; // Initialize temperature values. These will be updated when the weather data is fetched
 let celsiusValue = null;
 let fahrenheitValue = null; // Fahrenheit value will be calculated based on the Celsius value
@@ -102,6 +176,11 @@ async function checkWeather(city) {
   let visibility = data.visibility / 1000;
   let maxTemp = Math.round(data.main.temp_max);
   let minTemp = Math.round(data.main.temp_min);
+  timeZone = data.timezone;
+
+  let iframe = document.getElementById("gmap_canvas");
+  iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+  console.log(timeZone);
   //Convert Unix time to readable time
   const convertTimestamp = (timeStamp_1, timeStamp_2) => {
     var sunrise = new Date(parseInt(timeStamp_1 * 1000));
@@ -124,10 +203,8 @@ async function checkWeather(city) {
     "Ground-Level: " + data.main.grnd_level + "m";
   document.querySelector(".sea-level").innerText =
     "Sea-Level: " + data.main.sea_level + "m";
-  document.querySelector(".max-temp").innerText =
-    "Max-Temp: " + maxTemp + " °C";
-  document.querySelector(".min-temp").innerText =
-    "Min-Temp: " + minTemp + " °C";
+  document.querySelector(".max-temp").innerText = maxTemp + " °C";
+  document.querySelector(".min-temp").innerText = minTemp + " °C";
   document.querySelector(".visibility").innerText =
     "Visibility: " + visibility + " KM";
   document.querySelector(".timeRise").innerText = times.sunrise;
@@ -151,14 +228,12 @@ async function checkWeather(city) {
   document.querySelector(".city-name").innerText =
     data.name + ", " + data.sys.country;
   // document.querySelector(".temp").innerText = Math.round(data.main.temp) + "";
-  document.querySelector(".humidity").innerText =
-    "Humidity: " + data.main.humidity + "%";
+  document.querySelector(".humidity").innerText = data.main.humidity + "%";
   document.querySelector(".humidity-1").innerText =
-    "Humidity: " + data.main.humidity + "%";
+    "Humidity:" + data.main.humidity + "%";
   document.querySelector(".feels-like").innerText =
-    "Feels Like: " + Math.round(data.main.feels_like) + "°C";
-  document.querySelector(".pressure").innerText =
-    "Pressure: " + data.main.pressure + " Mb";
+    Math.round(data.main.feels_like) + "°C";
+  document.querySelector(".pressure").innerText = data.main.pressure + " Mb";
   document.querySelector(".wind").innerText =
     "Wind Speed: " +
     data.wind.speed +
@@ -193,7 +268,44 @@ async function checkWeather(city) {
     document.querySelector(".weather-icon").src = "images/images/Weahter-snow.";
     // document.querySelector(".card").style.backgroundColor = "#d5e9ecff";
   }
+
+  function addOffsetToUTC(offsetSeconds) {
+    // Get current UTC time
+    const now = new Date();
+    const trueUTC = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+
+    // Add offset (convert seconds to milliseconds)
+    const localTime = new Date(trueUTC.getTime() + offsetSeconds * 1000);
+
+    return {
+      utc: trueUTC.toISOString(),
+      local: localTime.toISOString(),
+      localFormatted: localTime.toLocaleString(),
+      offset: offsetSeconds,
+      timeZone: formatTimezone(offsetSeconds),
+    };
+  }
+
+  function formatTimezone(offsetSeconds) {
+    const hours = Math.floor(Math.abs(offsetSeconds) / 3600);
+    const minutes = Math.floor((Math.abs(offsetSeconds) % 3600) / 60);
+    const sign = offsetSeconds >= 0 ? "+" : "-";
+    return `UTC${sign}${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}`;
+  }
+
+  // Usage
+  const result = addOffsetToUTC(timeZone); // +5:30 (India)
+  console.log(result.local);
+  console.log(result.utc);
+  console.log(result.localFormatted);
+  time = result.localFormatted;
+
+  document.querySelector(".date").innerText = result.localFormatted; // Display the formatted date and time
+  document.querySelector(".date-1").innerText = result.localFormatted; // Display the formatted date and time
 }
+
 searchBtn.addEventListener("click", () => {
   const city = searchBox.value;
   checkWeather(city);
@@ -355,4 +467,5 @@ toggleButton.addEventListener("click", () => {
 //   timeZone: timezone;
 
 // }
+
 console.log("Hello, World!");

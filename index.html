@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <link
+      rel="shortcut icon"
+      href="images/images/weather.svg"
+      type="image/x-icon"
+    />
+    <title>Weather24/7</title>
+
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <style>
@@ -24,85 +30,329 @@
       <button id="theme-toggle" aria-label="Toggle Theme">🌙</button>
 
       <div class="weather clear-day" id="weather-bg">
-        <div class="details-weather">
-          <p class="date orbitron-clock"></p>
-          <div><img src="images/images/Rainy.gif" class="weather-icon" /></div>
-          <div class="percipitation-container">
-            <p class="percipitation feels-like">
-              Feels like: 31<span>°C</span>
-            </p>
-            <p class="percipitation max-temp">Max temperature: 35°C</p>
-            <p class="percipitation min-temp">Min temperature: 26°C</p>
-            <p class="percipitation humidity">Humidity: 76%</p>
-            <p class="percipitation pressure">Pressure: 1007 Mb</p>
-            <p class="percipitation cloud">Cloud cover: 90%</p>
-          </div>
-        </div>
         <div class="city-weather-container">
-          <div>
-            <img
-              src="/assets/location.svg"
-              alt="location icon"
-              class="location-icon"
-            />
-            <h2 class="city-name" style="font-size: 2rem">Medinipur</h2>
+          <div class="city-weather-container-top item1">
+            <div>
+              <img
+                src="/assets/location.svg"
+                alt="location icon"
+                class="location-icon"
+              />
+              <h2 class="city-name" style="font-size: 2rem">Medinipur</h2>
+              <p class="date orbitron-clock">
+                Thurdsday, 31 Oct 2002 | Local time 22:10
+              </p>
+            </div>
+
+            <div class="temp-container">
+              <div>
+                <img src="images/images/Rainy.gif" class="weather-icon" />
+              </div>
+              <div>
+                <h1 class="temp">24</h1>
+                <span class="celsius">°C</span> <span class="i">|</span>
+                <span class="fahrenheit">°F</span>
+              </div>
+            </div>
+            <div class="weather-description">Drizzile</div>
           </div>
-          <div>
-            <h1 class="temp">24</h1>
-            <span class="celsius">°C</span> <span class="i">|</span>
-            <span class="fahrenheit">°F</span>
+          <div class="percipitation-container item2">
+            <div class="percipitation-box">
+              <p class="percipitation p-fade">Feels like</p>
+              <p class="percipitation feels-like">31<span>°C</span></p>
+            </div>
+            <div class="percipitation-box">
+              <p class="percipitation p-fade">Max temperature</p>
+              <p class="percipitation max-temp">35°C</p>
+            </div>
+            <div class="percipitation-box">
+              <p class="percipitation p-fade">Min temperature</p>
+              <p class="percipitation min-temp">26°C</p>
+            </div>
+            <div class="percipitation-box">
+              <p class="percipitation p-fade">Humidity</p>
+              <p class="percipitation humidity">76%</p>
+            </div>
+            <div class="percipitation-box">
+              <p class="percipitation p-fade">Pressure</p>
+              <p class="percipitation pressure">1007 Mb</p>
+            </div>
+            <div class="percipitation-box">
+              <p class="percipitation p-fade cloud">Cloud cover</p>
+              <p class="percipitation cloud">90%</p>
+            </div>
           </div>
-          <div class="weather-description">Drizzile</div>
+          <div class="item3 item item3-daily-forecast">
+            <div class="div-1">
+              <p>Today</p>
+              <img src=" /images/images/clouds.png" alt="sunny" />
+              <p>24 20</p>
+            </div>
+            <div class="div-2">
+              <p>Monday</p>
+              <img src="/images/images/clear.png" alt="clear" />
+              <p>26 21</p>
+            </div>
+            <div class="div-3">
+              <p>Tuesday</p>
+              <img src="/images/images/drizzle.png" alt="" />
+              <p>25 21</p>
+            </div>
+            <div class="div-4">
+              <p>Wenesday</p>
+              <img src="/images/images/rain.png" alt="" />
+              <p>28 23</p>
+            </div>
+            <div class="div-5">
+              <p>Thursday</p>
+              <img src="/images/images/mist.png" alt="" />
+              <p>26 24</p>
+            </div>
+            <div class="div-6">
+              <p>Friday</p>
+              <img src="./images/images/drizzle.png" alt="" />
+              <p>27 21</p>
+            </div>
+            <div class="div-7">
+              <p>Saturday</p>
+              <img src="/images/images/clear.png" alt="" />
+              <p>25 22</p>
+            </div>
+          </div>
+          <div class="item-container item-container-details">
+            <div class="item11 item-heading">
+              <h4>Weather details</h4>
+              <p class="date-1">Thurdsday, 31 Oct 2002 | Local time 07:06 AM</p>
+            </div>
+            <!-- <div class="item-container-div2"> -->
+            <div class="item4 item">
+              <div class="col col-1">
+                <div><img src="images/images/humidity_1.png" /></div>
+                <div class="humidity-1">
+                  <p>Humidity: 79%</p>
+                </div>
+              </div>
+            </div>
+            <div class="item5 item">
+              <div class="col col-2">
+                <img src="images/images/wind.png" />
+                <div class="wind">
+                  <p>Wind speed: 02 km/h</p>
+                </div>
+              </div>
+            </div>
+            <div class="item6 item">
+              <div class="col col-3">
+                <img src="images/images/visibility.png" alt="Visibility" />
+                <div class="wind">
+                  <p class="visibility">Visibility: 10 km</p>
+                </div>
+              </div>
+            </div>
+            <div class="item7 item">
+              <div class="col col-4">
+                <img src="images/images/uv-index.png" />
+                <div class="wind">
+                  <p>Uv Index: Moderate</p>
+                </div>
+              </div>
+            </div>
+            <div class="item8 item">
+              <div class="col col-5 sunrise-sunset">
+                <div class="sunrise-container">
+                  <div><p class="sunset wind">Sunrise</p></div>
+                  <div class="sunrise"><img src="assets/sunrise.svg" /></div>
+                  <div class="sunrise wind">
+                    <p class="timeRise">6:15 am</p>
+                  </div>
+                </div>
+
+                <div class="sunset-container">
+                  <div><p class="sunset wind">Sunset</p></div>
+                  <div><img src="assets/sunset.svg" /></div>
+                  <div><p class="sunset wind timeSet">7:05 pm</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="item9 item">
+              <div class="col col-6">
+                <img src="images/images/wind.png" />
+                <div class="wind">
+                  <p class="ground-level">Ground Level: 1000m</p>
+                  <p class="sea-level">Sea Level: 1000m</p>
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="item10 item news-container">
+            <h4>Latest News</h4>
+
+            <div class="div-news first-div-news">
+              <div>🚀 ISRO successfully launches new satellite</div>
+              <div>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Fullyintegratedpslv-c37seenwithmobileservicetower.jpg/800px-Fullyintegratedpslv-c37seenwithmobileservicetower.jpg"
+                  height="60px"
+                  width="60px"
+                  alt="ISRO News"
+                />
+              </div>
+            </div>
+
+            <div class="div-news">
+              <div>📱 Apple unveils iPhone 16 with AI-powered features</div>
+              <div>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Clap_cinema.png/320px-Clap_cinema.png"
+                  alt="Movie News"
+                  width="60"
+                  height="40"
+                />
+              </div>
+            </div>
+
+            <div class="div-news">
+              <div>🌍 Global summit on climate change begins today</div>
+              <div>
+                <img
+                  src="https://via.placeholder.com/60x40"
+                  alt="Climate News"
+                />
+              </div>
+            </div>
+
+            <div class="div-news">
+              <div>🏏 India wins T20 series against Australia</div>
+              <div>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Cricket_ball.svg/320px-Cricket_ball.svg.png"
+                  alt="Cricket News"
+                  width="60"
+                  height="40"
+                />
+              </div>
+            </div>
+
+            <div class="div-news">
+              <div>
+                🎬 Upcoming blockbuster movie breaks records in advance bookings
+              </div>
+              <div>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Clap_cinema.png/320px-Clap_cinema.png"
+                  alt="Movie News"
+                  width="60"
+                  height="40"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="details">
-          <div class="col col-1">
-            <img src="images/images/humidity_1.png" />
-            <div class="humidity-1">
-              <p>Humidity: 79%</p>
+        <div class="details-container">
+          <h5>Map Radar</h5>
+          <div class="details">
+            <div class="mapouter">
+              <div class="gmap_canvas">
+                <iframe
+                  height="100%"
+                  width="100%"
+                  id="gmap_canvas"
+                  src="https://maps.google.com/maps?q=Kolkata&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  scrolling="no"
+                ></iframe>
+                <!-- <a href="https://123movies-to.org"></a><br /> -->
+                <!-- <style>
+                  .mapouter {
+                    position: relative;
+                    text-align: right;
+                    height: 500px;
+                    width: 600px;
+                  }
+                </style> -->
+                <!-- <a href="https://www.embedgooglemap.net"
+                  >google maps html code</a
+                > -->
+              </div>
             </div>
           </div>
-          <div class="col col-2">
-            <img src="images/images/wind.png" />
-            <div class="wind">
-              <p>Wind speed: 02 km/h</p>
-            </div>
+        </div>
+        <div class="weather-news weather-news-container">
+          <h3>Weather News</h3>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
+          voluptatibus doloremque animi rerum sunt vero sint corporis quas
+          officiis maxime reprehenderit voluptate, a impedit cum. Esse
+          laudantium eveniet sunt est.
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero,
+            explicabo! Tempora maxime vero fugit in, mollitia unde illum nobis
+            quas. Nulla et tempore quas exercitationem corporis perspiciatis
+            explicabo dolor nisi.
           </div>
-          <div class="col col-3">
-            <img src="images/images/visibility.png" alt="Visibility" />
-            <div class="wind">
-              <p class="visibility">Visibility: 10 km</p>
-            </div>
+          <div>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat
+            recusandae dolores culpa temporibus ea saepe ratione cupiditate
+            veritatis esse, expedita at ex ipsum ab placeat, beatae vero aperiam
+            quo nam!
           </div>
-          <div class="col col-4">
-            <img src="images/images/uv-index.png" />
-            <div class="wind">
-              <p>Uv Index: Moderate</p>
-            </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quae
+            reprehenderit necessitatibus similique voluptates. Omnis nesciunt
+            quidem dignissimos autem, explicabo sit, rerum hic soluta nam itaque
+            fuga adipisci, iste similique!
           </div>
-          <div class="col col-5 sunrise-sunset">
-            <div class="sunrise-container">
-              <div><p class="sunset wind">Sunrise</p></div>
-              <div class="sunrise"><img src="assets/sunrise.svg" /></div>
-              <div class="sunrise wind"><p class="timeRise">6:15 am</p></div>
-            </div>
-
-            <div class="sunset-container">
-              <div><p class="sunset wind">Sunset</p></div>
-              <div><img src="assets/sunset.svg" /></div>
-              <div><p class="sunset wind timeSet">7:05 pm</p></div>
-            </div>
+          <div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Exercitationem labore magni qui quo harum magnam velit fuga debitis
+            sapiente dolores saepe explicabo hic necessitatibus quas, quam ipsum
+            similique minus animi.
           </div>
-          <div class="col col-6">
-            <img src="images/images/wind.png" />
-            <div class="wind">
-              <p class="ground-level">Ground Level: 1000m</p>
-              <p class="sea-level">Sea Level: 1000m</p>
-            </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quae
+            reprehenderit necessitatibus similique voluptates. Omnis nesciunt
+            quidem dignissimos autem, explicabo sit, rerum hic soluta nam itaque
+            fuga adipisci, iste similique!
+          </div>
+          <div>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla id
+            minima eaque laudantium architecto. Eveniet facere aut dicta
+            laboriosam distinctio nam soluta architecto quam iusto placeat?
+            Laudantium dolore ipsa nam.
+          </div>
+          <div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Exercitationem labore magni qui quo harum magnam velit fuga debitis
+            sapiente dolores saepe explicabo hic necessitatibus quas, quam ipsum
+            similique minus animi.
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quae
+            reprehenderit necessitatibus similique voluptates. Omnis nesciunt
+            quidem dignissimos autem, explicabo sit, rerum hic soluta nam itaque
+            fuga adipisci, iste similique!
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et harum
+            aliquam qui error amet consequuntur, necessitatibus fugiat ad
+            exercitationem dignissimos ratione at rerum voluptas, rem tempora
+            sint, dolorum non ut.
+          </div>
+          <div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Exercitationem labore magni qui quo harum magnam velit fuga debitis
+            sapiente dolores saepe explicabo hic necessitatibus quas, quam ipsum
+            similique minus animi.
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quae
+            reprehenderit necessitatibus similique voluptates. Omnis nesciunt
+            quidem dignissimos autem, explicabo sit, rerum hic soluta nam itaque
+            fuga adipisci, iste similique!
           </div>
         </div>
       </div>
     </div>
+
     <script src="index.js"></script>
   </body>
 </html>
