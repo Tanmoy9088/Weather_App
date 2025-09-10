@@ -6,12 +6,15 @@
 // The script also includes event listeners for user interactions, such as clicking the search button, pressing
 
 const apiKey = "0fb92c3562b1cbbe6aeddb73eaaa63a5";
+const newsApiKey = "6c7836a2b6224976a08feab6d46c81e3";
 const apiUrl =
   "https://api.openweathermap.org/data/2.5/weather?units=metric&q="; // This is the base URL for the OpenWeatherMap API. It includes the API key and specifies that the temperature should be in metric units (Celsius)
 
-
-const apiUrl2 = "https://api.open-meteo.com/v1/forecast?latitude=19.0760&longitude=72.8777&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Kolkata";
-// Format the date and time for display
+const newsUrl = "https://newsapi.org/v2/everything?q=";
+const weathernewsUrl =
+  "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=6c7836a2b6224976a08feab6d46c81e3";
+// console.log(weathernewsUrl);
+// q=tesla&from=2025-08-08&sortBy=publishedAt&apiKey="// Format the date and time for display
 
 function refreshTime() {
   const getDay = new Date().getDate(); // Get the current day of the month
@@ -179,7 +182,9 @@ async function checkWeather(city) {
   timeZone = data.timezone;
 
   let iframe = document.getElementById("gmap_canvas");
-  iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+  iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(
+    city
+  )}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
   console.log(timeZone);
   //Convert Unix time to readable time
   const convertTimestamp = (timeStamp_1, timeStamp_2) => {
@@ -309,6 +314,7 @@ async function checkWeather(city) {
 searchBtn.addEventListener("click", () => {
   const city = searchBox.value;
   checkWeather(city);
+  fetchNews(city);
 });
 searchBox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
@@ -467,5 +473,54 @@ toggleButton.addEventListener("click", () => {
 //   timeZone: timezone;
 
 // }
+
+async function fetchNews(query) {
+  try {
+    const date = Date.now();
+
+    const response = await fetch(
+      newsUrl +
+        query +
+        `&from=${date}&sortBy=publishedAt&apiKey=${newsApiKey}`
+    );
+
+    var data = await response.json();
+    console.log(data);
+    if (data.articles && data.articles.length > 0) {
+      renderNews(data.articles);
+    } else {
+      document.querySelector(".news-container").innerHTML =
+        "<p>No news found for this query.</p>";
+    }
+  } catch (error) {
+    console.error("Error Fetching News:", error);
+  }
+  console.log(data.articles[15]);
+}
+function renderNews(articles) {
+  const container = document.querySelector(".weather-news-container");
+  container.innerHTML = ""; // Clear old news
+
+  articles.forEach((article) => {
+    const card = document.createElement("div");
+    card.classList.add("news-card");
+
+    card.innerHTML = `
+      <img src="${article.urlToImage || "fallback.jpg"}" height="100px" width="150px" alt="News image" />
+      <h3>${article.title}</h3>
+
+      <a href="${article.url}" target="_blank">Read more</a>
+    `;
+
+    container.appendChild(card);
+  });
+}
+const newsButton = document.querySelector(".news-button");
+const newsSearchBox = document.querySelector(".news-search");
+newsButton.addEventListener("click", () => {
+  const query = newsSearchBox.value;
+  fetchNews(query);
+  console.log("clicked");
+});
 
 console.log("Hello, World!");
