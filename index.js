@@ -217,9 +217,6 @@ async function checkWeather(city) {
   weatherCondition = data.weather[0].main; // Get the main weather condition (e.g., Clear, Clouds, Rain)
   console.log("Weather condition:", weatherCondition);
 
-  // Example usage after fetching weather:
-  setWeatherBackground(weatherCondition);
-
   celsiusValue = Math.round(data.main.temp);
   fahrenheitValue = Math.round((celsiusValue * 9) / 5 + 32);
   tempElement.innerText = celsiusValue; // Initialize with Celsius value
@@ -249,8 +246,7 @@ async function checkWeather(city) {
 
   document.querySelector(".weather-description").innerText =
     description.charAt(0).toUpperCase() + description.slice(1); // Capitalize the first letter of the description
-  document.querySelector(".cloud").innerText =
-    "Clouds cover: " + data.clouds.all + "%";
+  document.querySelector(".cloud").innerText = data.clouds.all + "%";
 
   if (data.weather[0].main == "Clouds") {
     document.querySelector(".weather-icon").src = "images/images/Cloudy.gif";
@@ -382,38 +378,6 @@ getDirectonWind(degree); // Example usage of getDirectonWind function
 // This function takes a degree value and returns the corresponding wind direction as a string
 console.log(getDirectonWind(degree));
 
-// Function to set the background based on weather condition
-// This function updates the background of the weather card based on the current weather condition
-function setWeatherBackground(condition) {
-  const bg = document.getElementById("weather-bg");
-
-  // Remove only old weather classes
-  bg.classList.remove("clear-day", "clouds", "rain", "snow", "thunderstorm");
-
-  // Add the new one based on condition
-  switch (condition.toLowerCase()) {
-    case "clear":
-      bg.classList.add("clear-day");
-      break;
-    case "clouds":
-      bg.classList.add("clouds");
-      break;
-    case "rain":
-    case "drizzle":
-      bg.classList.add("rain");
-      document.querySelector(".rain-container").display = "show";
-      break;
-    case "snow":
-      bg.classList.add("snow");
-      break;
-    case "thunderstorm":
-      bg.classList.add("thunderstorm");
-      break;
-    default:
-      bg.classList.add("clear-day");
-  }
-}
-
 const toggleButton = document.getElementById("theme-toggle");
 const root = document.documentElement;
 
@@ -423,65 +387,55 @@ toggleButton.addEventListener("click", () => {
   root.setAttribute("data-theme", newTheme);
 
   // Change icon for fun
-  toggleButton.textContent = newTheme === "light" ? "🌞" : "🌙";
+  toggleButton.textContent = newTheme === "light" ? "🌙" : "🌞";
 });
 
-// const rainContainer = document.querySelector(".rain-container");
-
-// const createDrop = function () {
-//   const drop = document.createElement("div");
-//   drop.classList.add("raindrop");
-
-//   // Random horizontal position
-//   drop.style.left = Math.random() * window.innerWidth + "px";
-
-//   // Random length & speed
-//   const length = Math.random() * 20 + 10; // 10-30px
-//   drop.style.height = length + "px";
-//   const duration = Math.random() * 1 + 0.5; // 0.5 - 1.5s
-//   drop.style.animationDuration = duration + "s";
-
-//   // When animation ends → remove drop + make splash
-//   drop.addEventListener("animationend", () => {
-//     drop.remove();
-//     createSplash(parseFloat(drop.style.left));
-//   });
-
-//   rainContainer.appendChild(drop);
-// };
-
-// // Create splash at drop position
-// const createSplash = function (x) {
-//   const splash = document.createElement("div");
-//   splash.classList.add("splash");
-//   splash.style.left = x - 4 + "px"; // center splash
-//   splash.style.bottom = "0px";
-//   rainContainer.appendChild(splash);
-
-//   splash.addEventListener("animationend", () => splash.remove());
-// };
-
-// Continuous rain
-// setInterval(() => {
-//   for (let i = 0; i < 3; i++) {
-//     // 3 drops per tick
-//     createDrop();
-//   }
-// }, 50);
-
-// const timeTable = {
-//   timeZone: timezone;
-
-// }
+const precipitationApi =
+  "https://api.open-meteo.com/v1/forecast?latitude=82&longitude=13.41&hourly=precipitation,precipitation_probability";
+console.log(precipitationApi);
+// const apiCall = 
+// const response = async(precipitationApi);
+var precipitationValue = [50, 55, 60, 85, 95, 98, 45];
+var xValues = [
+  "Today",
+  "Tomorrow",
+  "Monday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+var barColors = "white";
+const myChart = new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [
+      {
+        backgroundColor: barColors,
+        data: precipitationValue,
+      },
+    ],
+  },
+  options: {
+    legend: {
+      display: false,
+    },
+    title: {
+      display: true,
+      text: "Precipitation Percentage Prediction Chart",
+    },
+  },
+});
 
 async function fetchNews(query) {
   try {
-    const date = Date.now();
+    const dateObject = Date.now();
+    const date = new Date(dateObject);
+    console.log("Date:", date);
 
     const response = await fetch(
-      newsUrl +
-        query +
-        `&from=${date}&sortBy=publishedAt&apiKey=${newsApiKey}`
+      newsUrl + query + `&from=${date}&sortBy=publishedAt&apiKey=${newsApiKey}`
     );
 
     var data = await response.json();
@@ -506,10 +460,12 @@ function renderNews(articles) {
     card.classList.add("news-card");
 
     card.innerHTML = `
-      <img src="${article.urlToImage || "fallback.jpg"}" height="100px" width="150px" alt="News image" />
-      <h3>${article.title}</h3>
+      
 
-      <a href="${article.url}" target="_blank">Read more</a>
+   <a href="${article.url}" target="_blank"><img src="${
+      article.urlToImage || "fallback.jpg"
+    }" min-height="50px" min-width="50px" alt="News image" />
+      <h5>${article.title}   </h5></a>
     `;
 
     container.appendChild(card);
