@@ -393,7 +393,7 @@ toggleButton.addEventListener("click", () => {
 const precipitationApi =
   "https://api.open-meteo.com/v1/forecast?latitude=82&longitude=13.41&hourly=precipitation,precipitation_probability";
 console.log(precipitationApi);
-// const apiCall = 
+// const apiCall =
 // const response = async(precipitationApi);
 var precipitationValue = [50, 55, 60, 85, 95, 98, 45];
 var xValues = [
@@ -431,7 +431,9 @@ const myChart = new Chart("myChart", {
 async function fetchNews(query) {
   try {
     const dateObject = Date.now();
-    const date = new Date(dateObject);
+    const date = new Date().toISOString().split("T")[0];
+    // gives "2025-10-01"
+
     console.log("Date:", date);
 
     const response = await fetch(
