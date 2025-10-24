@@ -68,13 +68,13 @@ body {
 :root {
   /* --bg-color: #627e75; */
   --text-color: #f3f5f9;
-  --card-bg: rgba(248, 245, 234, 0.62);
+  --card-bg: #fbfbfb9e;
   --dark-bg: #ffffff;
   --heading-bg: #e5e5e5;
   --news-bg: #818da8ff;
   --bd-color: #000000ff;
-  --item-color: hsla(0, 0%, 80%, 1);
-  --item-text-color: hsla(211, 68%, 10%, 1);
+  --item-color: #C2F2FF;
+  --item-text-color: hsla(211, 51%, 8%, 1.00);
   --p-fade: hsla(0, 1%, 40%, 1);
   --weather-news-container: #dbdee2ff;
   --hover-color: hsla(210, 40%, 82%, 1.00);
@@ -95,7 +95,7 @@ body {
   --bd-color: #f4f7f3ff;
   --item-color: hsla(211, 75%, 15%, 1);
   --item-text-color: hsla(0, 0%, 96%, 1);
-  --p-fade: hsla(0, 9%, 70%, 1);
+  --p-fade: hsla(0, 1%, 86%, 1.00);
   --weather-news-container: #070b11ff;
   --hover-color: hsla(211, 68%, 35%, 1);
 }
@@ -136,7 +136,9 @@ body {
   transform: rotate(360deg) scale(1.1);
 }
 .footer {
-  background-color: gray;
+  display: flex;
+  justify-content: column;
+  background-color: #fafafaff;
   height: 250px;
   width: 100%;
 }

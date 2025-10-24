@@ -482,3 +482,8 @@ newsButton.addEventListener("click", () => {
 });
 
 console.log("Hello, World!");
+
+let footerDate = new Date();
+footerDate = footerDate.getFullYear();
+console.log(footerDate);
+document.querySelector(".date-footer").innerText = footerDate;
